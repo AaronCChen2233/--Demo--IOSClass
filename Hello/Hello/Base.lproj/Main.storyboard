@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MEi-jp-LLU">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Hello" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRv-KR-kfi">
+                                <rect key="frame" x="20" y="44" width="151" height="139"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fOK-fV-2we"/>
+                                    <segue destination="f5i-1J-OJo" kind="show" id="Ja0-nz-LxV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7Gn-nb-Ceb"/>
+                    <connections>
+                        <outlet property="myButton" destination="xRv-KR-kfi" id="4jO-NT-EF6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="101.78571428571428"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cqO-yw-5ci">
+            <objects>
+                <viewController id="f5i-1J-OJo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="60j-4k-lFQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screen Shot 2020-04-14 at 2.29.56 PM" translatesAutoresizingMaskIntoConstraints="NO" id="QYz-ZB-SjL">
+                                <rect key="frame" x="20" y="44" width="374" height="282"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="IIf-I1-8iT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3mM-jj-fIL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XhV-cm-nEZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1918.840579710145" y="101.78571428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RZK-Kb-M6V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MEi-jp-LLU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zpm-z8-YP2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="q4d-Gv-Pqe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nwK-3E-cSd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="101.78571428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Screen Shot 2020-04-14 at 2.29.56 PM" width="83" height="94"/>
+    </resources>
+</document>
