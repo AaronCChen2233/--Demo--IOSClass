@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var scoreLabel: UILabel!
     
     let incorrectMovesAllowed = 7
-    var listOfWords = ["names", "house", "objects", "piano", "violin", "game", "swift", "radio", "vedio", "bug", "score", "new", "no"]
+    var listOfWords = ["names", "house", "objects", "piano", "violin", "game", "swift", "radio", "vedio", "bug", "score", "new", "hello", "this", "app", "is" ,"made", "by", "aaron", "chen"]
     var totalWins = 0 {
         didSet {
             newRound()
