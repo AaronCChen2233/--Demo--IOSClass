@@ -10,6 +10,6 @@ import Foundation
 
 struct ToDoItem {
     var name: String
-    var description:String
+    var toDoDescription:String
     var isDone:Bool
 }

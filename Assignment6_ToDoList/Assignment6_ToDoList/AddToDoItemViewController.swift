@@ -87,14 +87,14 @@ class AddToDoItemViewController: UIViewController {
         self.toDoItem = toDoItem
         isEditingMode = true
         nameTextField.text = toDoItem.name
-        descriptionField.text = toDoItem.description
+        descriptionField.text = toDoItem.toDoDescription
     }
     
     @objc func saveNewToDoItem(_ sender: UIBarButtonItem) {
         if isEditingMode{
-            self.delegate?.editsave(toDoItem: ToDoItem(name: nameTextField.text!, description: descriptionField.text!, isDone: toDoItem!.isDone))
+            self.delegate?.editsave(toDoItem: ToDoItem(name: nameTextField.text!, toDoDescription: descriptionField.text!, isDone: toDoItem!.isDone))
         }else{
-            self.delegate?.save(toDoItem: ToDoItem(name: nameTextField.text!, description: descriptionField.text!, isDone: false))
+            self.delegate?.save(toDoItem: ToDoItem(name: nameTextField.text!, toDoDescription: descriptionField.text!, isDone: false))
         }
         dismiss(animated: true, completion: nil)
     }

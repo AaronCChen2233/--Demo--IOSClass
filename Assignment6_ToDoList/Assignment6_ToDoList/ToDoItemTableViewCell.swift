@@ -39,7 +39,7 @@ class ToDoItemTableViewCell: UITableViewCell {
     
     func updateUI(with toDoItem: ToDoItem) {
         nameLabel.text = toDoItem.name
-        descriptionLabel.text = toDoItem.description
+        descriptionLabel.text = toDoItem.toDoDescription
         checkedLable.isHidden = !toDoItem.isDone
     }
     

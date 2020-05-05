@@ -31,9 +31,9 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
         toDoSections[.low] = []
         
         // MARK: - Test Data
-        toDoSections[.high] = [ToDoItem(name: "Apply tax refund", description: "Before 1, june", isDone: false),ToDoItem(name: "Buy some beers", description: "Must buy Kronenbourg 1664 Beer", isDone: false)]
-        toDoSections[.medium] = [ToDoItem(name: "Finish Assignment 6", description: "", isDone: true)]
-        toDoSections[.low] = [ToDoItem(name: "Learn new songs", description: "Learn new songs on violin", isDone:false)]
+        toDoSections[.high] = [ToDoItem(name: "Apply tax refund", toDoDescription: "Before 1, june", isDone: false),ToDoItem(name: "Buy some beers", toDoDescription: "Must buy Kronenbourg 1664 Beer", isDone: false)]
+        toDoSections[.medium] = [ToDoItem(name: "Finish Assignment 6", toDoDescription: "", isDone: true)]
+        toDoSections[.low] = [ToDoItem(name: "Learn new songs", toDoDescription: "Learn new songs on violin", isDone:false)]
         
         updateEditButtonstatus()
     }
