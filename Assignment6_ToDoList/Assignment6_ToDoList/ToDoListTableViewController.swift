@@ -25,10 +25,17 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
         tableView.register(ToDoItemTableViewCell.self, forCellReuseIdentifier: toDoId)
         tableView.allowsMultipleSelectionDuringEditing = true
         
+        /**Initial empty array for each section otherwise when add will got exception*/
+        toDoSections[.high] = []
+        toDoSections[.medium] = []
+        toDoSections[.low] = []
+        
         // MARK: - Test Data
-        toDoSections[.high] = [ToDoItem(name: "Apply tax refund", description: "Before 1, june", isDone: false),ToDoItem(name: "Buy some beers", description: "Kronenbourg 1664 Beer", isDone: false)]
+        toDoSections[.high] = [ToDoItem(name: "Apply tax refund", description: "Before 1, june", isDone: false),ToDoItem(name: "Buy some beers", description: "Must buy Kronenbourg 1664 Beer", isDone: false)]
         toDoSections[.medium] = [ToDoItem(name: "Finish Assignment 6", description: "", isDone: true)]
         toDoSections[.low] = [ToDoItem(name: "Learn new songs", description: "Learn new songs on violin", isDone:false)]
+        
+        updateEditButtonstatus()
     }
     
     // MARK: - Present add view
@@ -45,7 +52,6 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
             for selectionIndex in selectedRows.sorted(by: {$0.row > $1.row}){
                 tableView(tableView, commit: .delete, forRowAt: selectionIndex)
             }
-             navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
     
@@ -53,6 +59,9 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
     func save(toDoItem: ToDoItem) {
         toDoSections[.medium]?.append(toDoItem)
         tableView.insertRows(at: [IndexPath(row: toDoSections[.medium]!.count - 1, section: 1)], with: .automatic)
+        
+        /**When add Item enable editbutton*/
+        updateEditButtonstatus()
     }
     
     // MARK: - When edit tap save
@@ -115,11 +124,18 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
         toDoSections[TableSection(rawValue: sourceIndexPath.section)!]?.remove(at: sourceIndexPath.row)
     }
     
-    // MARK: - Swap Delete
+    // MARK: - Delete
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             toDoSections[TableSection(rawValue: indexPath.section)!]?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            updateEditButtonstatus()
+            /**If doesn't have any item leave editmode automatically*/
+            if (toDoSections.flatMap{$0.1}.count == 0){
+                setEditing(false, animated: true)
+            }
+            
         }
     }
     
@@ -132,6 +148,7 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
             navigationItem.rightBarButtonItem?.isEnabled = false
         }else{
             navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToAddToDoList)), animated: true)
+            navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     
@@ -139,6 +156,7 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         /**If is not editing*/
         if isEditing{
+            /**If is editing mode and doesn't select any item disable trash button*/
             navigationItem.rightBarButtonItem?.isEnabled = tableView.indexPathsForSelectedRows?.count != 0
         }else{
             toDoSections[TableSection(rawValue: indexPath.section)!]![indexPath.row].isDone.toggle()
@@ -161,5 +179,15 @@ class ToDoListTableViewController: UITableViewController, AddTableViewController
         /**Save indexPath later save will use it*/
         accessoryButtonTabIndex = indexPath
         navigationController?.present(UINavigationController(rootViewController: addVC), animated: true)
+    }
+    
+    // MARK: - When delete item or add item will call this method
+    fileprivate func updateEditButtonstatus() {
+        /**if toDoItem is 0 user can't check or drag so disable editButton*/
+        if (toDoSections.flatMap{$0.1}.count == 0){
+            editButtonItem.isEnabled = false
+        }else{
+            editButtonItem.isEnabled = true
+        }
     }
 }
