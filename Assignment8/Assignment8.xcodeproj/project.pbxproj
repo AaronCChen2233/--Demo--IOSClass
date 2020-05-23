@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B641D32247891DE004745B5 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B641D31247891DE004745B5 /* Restaurant.swift */; };
+		7B8434DE2479D37400028177 /* Array+RemovingDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8434DD2479D37400028177 /* Array+RemovingDuplicates.swift */; };
 		7B8627FC24786D1900B75023 /* RestaurantsCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8627FB24786D1900B75023 /* RestaurantsCategories.swift */; };
+		7B8628212478801600B75023 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8628202478801600B75023 /* UIView+ConstraintLayout.swift */; };
+		7B8914C82478A5FC00D5C3AC /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8914C72478A5FC00D5C3AC /* CategoryCollectionViewCell.swift */; };
+		7B8914CA2478A60F00D5C3AC /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8914C92478A60F00D5C3AC /* RestaurantCollectionViewCell.swift */; };
+		7B8914CC2478A9AC00D5C3AC /* UIColor+HexRgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8914CB2478A9AC00D5C3AC /* UIColor+HexRgb.swift */; };
 		7BE028192476E28D00D251ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE028182476E28D00D251ED /* AppDelegate.swift */; };
 		7BE0281B2476E28D00D251ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE0281A2476E28D00D251ED /* SceneDelegate.swift */; };
 		7BE0281D2476E28D00D251ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE0281C2476E28D00D251ED /* ViewController.swift */; };
@@ -16,7 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B641D31247891DE004745B5 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		7B8434DD2479D37400028177 /* Array+RemovingDuplicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RemovingDuplicates.swift"; sourceTree = "<group>"; };
 		7B8627FB24786D1900B75023 /* RestaurantsCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsCategories.swift; sourceTree = "<group>"; };
+		7B8628202478801600B75023 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
+		7B8914C72478A5FC00D5C3AC /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		7B8914C92478A60F00D5C3AC /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
+		7B8914CB2478A9AC00D5C3AC /* UIColor+HexRgb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexRgb.swift"; sourceTree = "<group>"; };
 		7BE028152476E28D00D251ED /* Assignment8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE028182476E28D00D251ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE0281A2476E28D00D251ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,17 +49,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B8627FA24786C7F00B75023 /* model */ = {
+		7B8627FA24786C7F00B75023 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				7B8627FB24786D1900B75023 /* RestaurantsCategories.swift */,
+				7B641D31247891DE004745B5 /* Restaurant.swift */,
 			);
-			path = model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		7B8627FD247870A200B75023 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7BE0281C2476E28D00D251ED /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -55,8 +69,20 @@
 		7B8627FE247870AE00B75023 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B8914C72478A5FC00D5C3AC /* CategoryCollectionViewCell.swift */,
+				7B8914C92478A60F00D5C3AC /* RestaurantCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7B86281F24787FEB00B75023 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7B8628202478801600B75023 /* UIView+ConstraintLayout.swift */,
+				7B8914CB2478A9AC00D5C3AC /* UIColor+HexRgb.swift */,
+				7B8434DD2479D37400028177 /* Array+RemovingDuplicates.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7BE0280C2476E28D00D251ED = {
@@ -78,12 +104,12 @@
 		7BE028172476E28D00D251ED /* Assignment8 */ = {
 			isa = PBXGroup;
 			children = (
+				7B86281F24787FEB00B75023 /* Utils */,
 				7B8627FE247870AE00B75023 /* View */,
 				7B8627FD247870A200B75023 /* Controller */,
-				7B8627FA24786C7F00B75023 /* model */,
+				7B8627FA24786C7F00B75023 /* Model */,
 				7BE028182476E28D00D251ED /* AppDelegate.swift */,
 				7BE0281A2476E28D00D251ED /* SceneDelegate.swift */,
-				7BE0281C2476E28D00D251ED /* ViewController.swift */,
 				7BE028212476E28F00D251ED /* Assets.xcassets */,
 				7BE028232476E28F00D251ED /* LaunchScreen.storyboard */,
 				7BE028262476E28F00D251ED /* Info.plist */,
@@ -162,9 +188,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8627FC24786D1900B75023 /* RestaurantsCategories.swift in Sources */,
+				7B8914CA2478A60F00D5C3AC /* RestaurantCollectionViewCell.swift in Sources */,
+				7B8434DE2479D37400028177 /* Array+RemovingDuplicates.swift in Sources */,
 				7BE0281D2476E28D00D251ED /* ViewController.swift in Sources */,
+				7B641D32247891DE004745B5 /* Restaurant.swift in Sources */,
 				7BE028192476E28D00D251ED /* AppDelegate.swift in Sources */,
 				7BE0281B2476E28D00D251ED /* SceneDelegate.swift in Sources */,
+				7B8914C82478A5FC00D5C3AC /* CategoryCollectionViewCell.swift in Sources */,
+				7B8914CC2478A9AC00D5C3AC /* UIColor+HexRgb.swift in Sources */,
+				7B8628212478801600B75023 /* UIView+ConstraintLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
