@@ -21,17 +21,16 @@ import UIKit
  
  (V)Feature #6: The collection view displaying your restaurants must be in a grid layout such that there are two restaurants in each row.
  
- ()Challenge #3: Add in a search bar to search for restaurants using different attributes. For example, you could search for the restaurant’s name.
- 
- ()Challenge #4: Add the use of AND filtering as an addition to Feature #3. For instance, in the example above, “Mexican”, “Asian”, and “American” are all in the same category (type of food) and “Breakfast” and “Lunch” are in the same category (meal time). If I select the “Mexican” and “Asian” options, the fil/Users/aaronchen/MyProjects/Project from other guys/SushiLover/SushiLover/Utils/UIColor+HexRgb.swiftter should display “Mexican OR Asian” restaurants because both options are from the same category. Meanwhile if I select the “American” and “Breakfast” options, the filter should display “American AND Breakfast” restaurants because both options are from different categories. If I select “Mexican”, “Asian”, and “Lunch” options, the filter should display “(Mexican OR Asian) AND Lunch” restaurants.
+ (V)Challenge #3: Add in a search bar to search for restaurants using different attributes. For example, you could search for the restaurant’s name.
  */
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating, UISearchBarDelegate {
+    
     let categoriesCellId = "categoriesCell"
     let restaurantCellId = "restaurantCell"
     let categories = RestaurantsCategories.allCases
     let restaurnts = [
-        Restaurant(name: "Bolero Cafe", review: 4.5, categories: [.cafe, .breakfast, .lunch, .dinner], imagePath: "bolero_cafe"),
+        Restaurant(name: "Bolero Cafe", review: 4.5, categories: [.cafe, .breakfast], imagePath: "bolero_cafe"),
         Restaurant(name: "Chef Chen beef noodles soup", review: 4, categories: [.taiwanese, .lunch, .dinner], imagePath: "chef_chen_beef_noodles_soup"),
         Restaurant(name: "Chishang Lunch Box", review: 5, categories: [.taiwanese, .lunch, .dinner], imagePath: "chishang_lunch_box"),
         Restaurant(name: "Din Tai Fung", review: 4.5, categories: [.taiwanese, .lunch, .dinner], imagePath: "din_tai_fung"),
@@ -39,7 +38,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         Restaurant(name: "Happy Day fast food", review: 3.3, categories: [.fastFood, .breakfast, .lunch, .dinner, .vegetarianFriendly], imagePath: "happy_day_fast_food"),
         Restaurant(name: "Smoking Joe", review: 3.0, categories: [.fastFood, .lunch, .dinner], imagePath: "smoking_joe"),
         Restaurant(name: "Steam Bar", review: 4.2, categories: [.bar, .lunch, .dinner], imagePath: "steam_bar"),
-        Restaurant(name: "Super Pizza", review: 5.0, categories: [.italian, .italian, .lunch, .dinner], imagePath: "super_pizza"),
+        Restaurant(name: "Super Pizza", review: 5.0, categories: [.italian, .fastFood, .lunch, .dinner], imagePath: "super_pizza"),
         Restaurant(name: "Taiwan Bar", review: 5.0, categories: [.taiwanese, .bar, .lunch, .dinner], imagePath: "taiwan_bar"),
         Restaurant(name: "Tocos", review: 4.5, categories: [.mexican, .breakfast, .vegetarianFriendly, .lunch, .dinner], imagePath: "tocos"),
         Restaurant(name: "Trattoria pasta", review: 2.0, categories: [.italian, .vegetarianFriendly, .lunch, .dinner], imagePath: "trattoria_pasta"),
@@ -47,14 +46,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         Restaurant(name: "Vegetable Lover", review: 1.0, categories: [.vegetarianFriendly, .breakfast, .lunch, .dinner], imagePath: "vegetable_lover"),
         Restaurant(name: "yamato", review: 4.5, categories: [.japanese, .lunch, .dinner], imagePath: "yamato_japanes_food")
     ]
+    let searchController = UISearchController(searchResultsController: nil)
+    
     var filteredRestaurnts = [Restaurant]()
     var categoriesCollectionView : UICollectionView!
     var restaurntCollectionView : UICollectionView!
     var selectedCategories = [RestaurantsCategories]()
     var isFiltering: Bool {
-        return selectedCategories.count != 0
+        return selectedCategories.count != 0 || !(searchController.searchBar.text?.isEmpty ?? true)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +89,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         restaurntCollectionView.register(RestaurantCollectionViewCell.self, forCellWithReuseIdentifier: restaurantCellId)
         restaurntCollectionView.dataSource = self
         restaurntCollectionView.delegate = self
+        
+        /**Search bar*/
+        navigationItem.searchController = searchController
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search by name"
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -116,6 +123,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    func filterItems(_ searchText : String = "") {
+        /**clear filtereRestaurnts first*/
+        filteredRestaurnts = [Restaurant]()
+        
+        /**If have search text filter by search text if not use original restaurnts*/
+        let searchFilteredRestaurnts = searchText.isEmpty ? restaurnts : restaurnts.filter{
+            $0.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        /**if didn't select any categories just use searchFilteredRestaurnts*/
+        if selectedCategories.count > 0{
+            for selectedCategory in selectedCategories{
+                /**use searchFilteredRestaurnts to implement "and" logic*/
+                filteredRestaurnts += searchFilteredRestaurnts.filter({$0.categories.filter{$0 == selectedCategory}.count > 0})
+            }
+            filteredRestaurnts = filteredRestaurnts.removingDuplicates()
+        }else{
+            filteredRestaurnts = searchFilteredRestaurnts
+        }
+        
+        restaurntCollectionView.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if collectionView == categoriesCollectionView{
             if collectionView.indexPathsForSelectedItems?.filter({$0 == indexPath}).count != 0{
@@ -126,19 +156,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 selectedCategories.append(categories[indexPath.row])
             }
             selectedCategories.removeDuplicates()
+            filterItems(searchController.searchBar.text!)
         }
-        
-        filteredRestaurnts = [Restaurant]()
-        for selectedCategory in selectedCategories{
-            filteredRestaurnts += restaurnts.filter({$0.categories.filter{$0 == selectedCategory}.count > 0})
-        }
-        
-        filteredRestaurnts = filteredRestaurnts.removingDuplicates()
-        restaurntCollectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (collectionView.frame.width - 2 * 8) / 2
         return CGSize(width: size, height: size)
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterItems(searchBar.text!)
     }
 }
